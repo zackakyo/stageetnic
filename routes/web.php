@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EnvironnementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+Route::get('/', [EnvironnementController::class, 'index']); 
 
 Route::get('/instance/', function () {
     return view('instance');
@@ -28,3 +30,5 @@ Route::get('/site/', function () {
 Route::get('/extension/', function () {
     return view('extension');
 });
+
+// Route::resource('environnement', 'EnvironnementController')->name() ; 
