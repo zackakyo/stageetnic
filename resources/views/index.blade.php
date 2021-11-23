@@ -22,7 +22,7 @@
 	<tbody>
 		@forelse($environnements as $env)
 			<tr>
-				<td>{{$env->nom}}</td>
+				<td>{{$env->abreviation}}</td>
 				<td>aaaaa</td>
 				<td> <a href="/instance/">détails de l'instance</a> </td>
 				<td> <a href="/site/">détails site</a> </td>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnvironnementController;
+use App\Http\Controllers\LoadDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +18,19 @@ use App\Http\Controllers\EnvironnementController;
 // Route::get('/', function () {
 //     return view('index');
 // });
-Route::get('/', [EnvironnementController::class, 'index']); 
+Route::get('/', [EnvironnementController::class, 'index'])->name('index'); 
+Route::get('/fillDB', [LoadDataController::class, 'FillDB'])->name('fillDB'); 
 
 Route::get('/instance/', function () {
     return view('instance');
-});
+})->name('instance');
 
 Route::get('/site/', function () {
     return view('site');
-});
+})->name('site');
 
 Route::get('/extension/', function () {
     return view('extension');
-});
+})->name('extensions');
 
 // Route::resource('environnement', 'EnvironnementController')->name() ; 
