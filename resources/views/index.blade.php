@@ -1,13 +1,11 @@
 
+ @extends('layouts.base')
 
 
-<h1>Stage ETNIC</h1>
-
-
-<h2>Ecran 1	</h2>
-
-
-<table border="1px" >
+@section('title', "Ecran 1 : liste des sites")
+    
+@section('left')
+<table border="1px" class="col-sm" >
 	<caption>Details de chaque site:</caption>
 	<thead>
 		<tr>
@@ -24,7 +22,7 @@
 			<tr>
 				<td>{{$env->abreviation}}</td>
 				<td>aaaaa</td>
-				<td> <a href="/instance/">détails de l'instance</a> </td>
+				<td> <a href="{{ Route('instance.index') }}">détails de l'instance</a> </td>
 				<td> <a href="/site/">détails site</a> </td>
 				<td>aaaaa</td>
 				<td>aaaaa</td>
@@ -34,3 +32,6 @@
 		@endforelse
 	</tbody>
 </table>
+@endsection
+
+

@@ -14,7 +14,6 @@ class EnvironnementController extends Controller
      */
     public function index()
     {
-
         $envs = Environnement::all();
         return view('index', ['environnements' => $envs]); 
         // return view(view:'environnement.index', compact(vamame:'envs')); 

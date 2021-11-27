@@ -9,18 +9,15 @@ use App\Models\Instance;
 use App\Models\Serveur;
 use App\Models\Extension;
 
-
 use League\CommonMark\Environment\Environment;
-
 
 class LoadDataController extends Controller
 {
-    public function FillDB(Request $request)
+    public function index()
     {
         $repertoire = "C:/Users/onant/Desktop/STAGE_ETNIC/ressources/structure_repertoires"; 
 
         $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
-        // remplissage de la table environnement
         while($fichier = @readdir($le_repertoire))
         {
             if ($fichier == "." || $fichier == "..") continue;
@@ -52,12 +49,6 @@ class LoadDataController extends Controller
                 {
                     $serv = new Serveur;
                     $serv->nom=$fichier; 
-                    // $serv->adresse_ip=""; 
-                    // $serv->version_redhat=""; 
-                    // $serv->version_apache=""; 
-                    // $serv->php_id=2; 
-                    // $serv->mysql_id=1; 
-                    // $serv->solr_id=1; 
                     $serv->environnement_id= $env->id; 
                     $serv->save(); 
                 }
@@ -80,9 +71,6 @@ class LoadDataController extends Controller
                 {
                     $inst = new Instance;
                     $inst->nom=$fichier; 
-                    // $inst->nom= ; 
-                    // $inst->nom= ; 
-                    // $inst->nom= ; 
                     $inst->serveur_id = $serv->id; 
                     $inst->save(); 
                 }
@@ -90,7 +78,6 @@ class LoadDataController extends Controller
                 $this->FillExtensions($repertoire.'/'.$fichier, $inst); 
             }
         }        
-
     }
 
     public function FillExtensions($repertoire, $inst)
@@ -101,38 +88,33 @@ class LoadDataController extends Controller
             if ($fichier == "." || $fichier == "..") continue;
             if(is_dir($repertoire.'/'.$fichier))
             {
+                $Ntyp3=[]; 
                 if(!($ext = Extension::all()->where('nom', $fichier)->first()))
                 {
+                    array_push($Ntyp3, $fichier); 
                     $ext = new Extension;
                     $ext->nom=$fichier; 
-                    // $ext->nom= ; 
-                    // $ext->nom= ; 
-                    // $ext->nom= ; 
                     $ext->save(); 
                 }
                 $ext = Extension::all()->where('nom', $fichier)->first(); 
-            }else{
-                // $file = $repertoire.'/'.$fichier; 
-                // $localConf = include($file); 
-                $localConf = include("C:/Users/onant/Desktop/STAGE_ETNIC/ressources/structure_repertoires/dev/typo3web01dev/T3_ETNIC10/LocalConfiguration.php"); 
-                // $localConf = shell_exec('php ' .$fichier );
-
-                // dd($file); 
-
-
-                foreach($localConf['EXTENSIONS'] as $key=>$value)
-                {
-                    if(!($ext = Extension::all()->where('nom', $key)->first()))
+                $this->ExploreEmConf($repertoire.'/'.$fichier, $ext, $Ntyp3);  
+            }elseif($fichier == "LocalConfiguration.php"){
+                $localConf = include($repertoire.'/'.$fichier);
+                if(isset($localConf['EXTENSIONS'])){
+                    foreach($localConf['EXTENSIONS'] as $key=>$value)
                     {
-                        $ext = new Extension;
-                        $ext->nom=$key; 
-                        // $ext->nom= ; 
-                        // $ext->nom= ; 
-                        // $ext->nom= ; 
-                        $ext->save(); 
-                    }    
-                } 
-                if(!($db = Base_de_donnee::all()->where('nom', $localConf['DB']['Connections']['Default']['dbname'])->first()))
+                        if(!($ext = Extension::all()->where('nom', $key)->first()))
+                        {
+                            $ext = new Extension;
+                            $ext->nom=$key; 
+                            if(!in_array($key, $Ntyp3)){   // vérifie si l'extension est de type typo3
+                                $ext->ter= true;
+                            }
+                            $ext->save(); 
+                        }    
+                    } 
+                }
+                if(!($db = Base_de_donnee::all()->where('nom', $localConf['DB']['Connections']['Default']['dbname'])->first()) && isset( $localConf['DB']['Connections']['Default']['dbname']) )
                 {
                     $db = new Base_de_donnee; 
                     $db->serveur_id = $inst->serveur_id;  
@@ -141,7 +123,33 @@ class LoadDataController extends Controller
                 }
             }
         }        
-
-
     }
+
+
+    public function ExploreEmConf($repertoire, $ext)
+    {
+        $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
+        while($fichier = @readdir($le_repertoire))
+        {
+            if ($fichier == "." || $fichier == "..") continue;
+            if(!is_dir($repertoire.'/'.$fichier))
+            {
+                if ($fichier=="ext_emconf.php"){
+                    $_EXTKEY = 'key'; 
+                    $EM_CONF = [$_EXTKEY =>[] ]; 
+                    include($repertoire.'/'.$fichier); 
+                    if(($ext = Extension::all()->where('nom', $ext->nom )->first()) && isset( $EM_CONF[$_EXTKEY]['version']))
+                    {
+                        $ext->version_ext= $EM_CONF[$_EXTKEY]['version'];
+                        $ext->actif= true;
+                        $ext->save(); 
+                    }
+                }
+            }
+        }        
+    }
+
+
+
+
 }

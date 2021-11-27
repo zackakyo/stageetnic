@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnvironnementController;
+use App\Http\Controllers\InstanceController;
+use App\Http\Controllers\ExtensionController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\LoadDataController;
+use App\Http\Controllers\PhpController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +19,16 @@ use App\Http\Controllers\LoadDataController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-Route::get('/', [EnvironnementController::class, 'index'])->name('index'); 
-Route::get('/fillDB', [LoadDataController::class, 'FillDB'])->name('fillDB'); 
 
-Route::get('/instance/', function () {
-    return view('instance');
-})->name('instance');
+Route::resource('/', EnvironnementController::class); 
+Route::resource('instance', InstanceController::class);
+Route::resource('extension', ExtensionController::class);
+Route::resource('site', SiteController::class);
 
-Route::get('/site/', function () {
-    return view('site');
-})->name('site');
 
-Route::get('/extension/', function () {
-    return view('extension');
-})->name('extensions');
+Route::resource('fillDB', LoadDataController::class); 
+Route::resource('php', PhpController::class); 
 
-// Route::resource('environnement', 'EnvironnementController')->name() ; 
+// Route::get('test', 'php/index'); 
+
+

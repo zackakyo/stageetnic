@@ -1,7 +1,11 @@
 
-<h1>Ecran 4</h1>
+ @extends('layouts.base')
 
-        <table border="1px" >
+
+@section('title', "Ecran 4 : extension ")
+    
+@section('left')
+<table border="1px" class="col-sm" >
 			<caption>detail de l'extension </caption>
             <thead>
                 <tr>
@@ -21,5 +25,8 @@
 							<td> oui / non </td>
 						</tr>	
                     </tbody>
-        </table>
+        </table
+
+ @endsection
+
 

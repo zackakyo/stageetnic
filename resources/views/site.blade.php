@@ -1,9 +1,11 @@
 
+ @extends('layouts.base')
 
-<h1>Ecran 3</h1>
 
-
-    <table border="1px" >
+@section('title', "Ecran 3 : site")
+    
+@section('left')
+<table border="1px" class="col-sm" >
 			<caption>détails du site </caption>
             <thead>
                 <tr>
@@ -27,3 +29,5 @@
 						</tr>	
                     </tbody>
     </table>
+
+    @endsection

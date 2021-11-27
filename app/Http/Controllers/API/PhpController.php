@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-use App\Models\Php; 
 
 class PhpController extends Controller
 {
@@ -13,11 +12,9 @@ class PhpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
-        $phps = Php::all(); 
-        return view('php/index', ['phps' => $phps, 'view' => 0]); 
+        //
     }
 
     /**
@@ -27,8 +24,7 @@ class PhpController extends Controller
      */
     public function create()
     {
-        $phps = Php::all(); 
-        return view('php/index', ['phps' => $phps, 'view' => 1]);
+        //
     }
 
     /**
@@ -39,14 +35,7 @@ class PhpController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'version'=>'required', 
-        ]); 
-        $php = new Php; 
-        $php->version = $request->input('version'); 
-        // $product->stock = $request->get(key:'version');
-        $php->save(); 
-        return redirect(to:'/php'); 
+        //
     }
 
     /**
@@ -68,11 +57,7 @@ class PhpController extends Controller
      */
     public function edit($id)
     {
-        $php = Php::find($id); 
-        
-        $phps = Php::all(); 
-        return view('php/index', ['phps' => $phps, 'php'=>$php, 'view' => 2]);
-        // return view('php.edit', ['php'=>$php]); 
+        //
     }
 
     /**
@@ -84,20 +69,7 @@ class PhpController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $php = Php::find($id);  
-        $request->validate([
-            'version'=>'required', 
-        ]); 
-        $php->version = $request->input('version'); 
-        $php->save(); 
-        return redirect(to:'/php'); 
-    
-    }
-
-    public function confirm($id)
-    {
-        $php = Php::find($id); 
-        return view('php.delete', ['php'=>$php]); 
+        //
     }
 
     /**
@@ -108,8 +80,6 @@ class PhpController extends Controller
      */
     public function destroy($id)
     {
-        $php = Php::find($id); 
-        $php->delete(); 
-        return redirect(to:'/php'); 
+        //
     }
 }

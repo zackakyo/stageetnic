@@ -41,13 +41,14 @@ class CreateCreationOfTablesTable extends Migration
         Schema::create('serveurs', function (Blueprint $table) {
             $table->id();
             $table->string('nom');  
-            // $table->string('adresse_ip');
-            // $table->string('version_redhat'); 
-            // $table->string('version_apache');
-            // $table->foreignId('php_id')->constrained()->default(null)->change();
-            // $table->foreignId('mysql_id')->constrained()->default(null)->change();;
-            // $table->foreignId('solr_id')->constrained()->default(null)->change();;
+            $table->string('adresse_ip')->default('unk');
+            $table->string('version_redhat')->default('unk'); 
+            $table->string('version_apache')->default('unk');
+            $table->foreignId('php_id')->nullable()->constrained();
+            $table->foreignId('mysql_id')->nullable()->constrained();
+            $table->foreignId('solr_id')->nullable()->constrained();
             $table->foreignId('environnement_id')->constrained();
+            // Schema::enableForeignKeyConstraints(); 
             $table->timestamps();
         });
 
@@ -68,18 +69,19 @@ class CreateCreationOfTablesTable extends Migration
         Schema::create('instances', function (Blueprint $table) {
             $table->id();
             $table->string('nom'); 
-            // $table->string('url_backend'); 
-            // $table->foreignId('typo3_id')->constrained();  
+            $table->string('url_backend')->nullable(); 
+            $table->foreignId('typo3_id')->nullable()->constrained();  
             $table->foreignId('serveur_id')->constrained();
-            // $table->foreignId('base_de_donnees_id')->constrained(); 
+            $table->foreignId('base_de_donnees_id')->nullable()->constrained(); 
             $table->timestamps();
         });
 
         Schema::create('extensions', function (Blueprint $table) {
             $table->id();
             $table->string('nom'); 
-            $table->boolean('ter')->default(false)->change(); 
-            // $table->string('version_ext'); 
+            $table->boolean('ter')->default(false); 
+            $table->boolean('actif')->default(false); 
+            $table->string('version_ext')->default('unk'); 
             $table->timestamps();
         });
         
