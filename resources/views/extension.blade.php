@@ -2,11 +2,14 @@
  @extends('layouts.base')
 
 
-@section('title', "Ecran 4 : extension ")
+@section('title1', "Ecran 4 : extension")
+@section('title2', "Détails d'une extension ")
     
-@section('left')
+@section('content')
+
+<main class="col-md col-lg border " role="main" >
+        <div class="single_service wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 <table border="1px" class="col-sm" >
-			<caption>detail de l'extension </caption>
             <thead>
                 <tr>
                     <th scope="col"> environnement  </th>
@@ -25,8 +28,12 @@
 							<td> oui / non </td>
 						</tr>	
                     </tbody>
-        </table
+</table>
 
+</div>
+        </div>               
+    </div>
+</main>
  @endsection
 
 

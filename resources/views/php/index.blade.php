@@ -2,15 +2,16 @@
  @extends('layouts.base')
 
 
-@section('title', "CRUD des Versions de PHP")
-    
-@section('left')
-    @component('php.list', ['phps'=>$phps] )
-    
+@section('title1', "Back-end")
+@section('content')
+@section('title2', "PHP")
+@section('content')
+<div class="row" >
+    @component('layouts.components.backendoptions')
     @endcomponent
-@endsection
+    @component('php.list', ['phps'=>$phps] )
+    @endcomponent
 
-@section('right')
     @if ($view === 1)
         @component('php.create')
         @endcomponent
@@ -21,5 +22,6 @@
         @component('php.confirm')
         @endcomponent
     @endif
+    </div>
 @endsection
 

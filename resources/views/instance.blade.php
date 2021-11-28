@@ -1,12 +1,21 @@
 
  @extends('layouts.base')
 
-
-@section('title', "Ecran 2 : instance")
+@section('title1', "Ecran 2 : instance")
+@section('title2', "Détails d'une instance")
     
-@section('left')
+@section('content')
+<div class="row text-center" >
+	<a href="{{ Route('instance.show', 1) }}" class="btn btn-primary col" > <p> Extensions </p></a>
+	<a href="{{ Route('instance.show', 2) }}" class="btn btn-primary col" > <p> Sites</p></a>
+</div>
+<div class="row" >
+
+	<main class="col-md col-lg border " role="main" >
+		<div class="single_service wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+@if ($pge == 1)	
+<h3 class="text-center">EXtensions</h3>
 <table border="1px" class="col-sm" >
-			<caption>liste des extensions : onglet 1 </caption>
             <thead>
                 <tr>
                     <th scope="col">  nom de l'extension </th>
@@ -32,13 +41,9 @@
 			</tbody>
 		</table>
 
-
-
-<hr>
-
-        
+@elseif($pge == 2)
+<h3 class="text-center" >sites</h3>
 <table border="1px" class="col-sm" >
-			<caption>liste des sites : onglet 2 </caption>
             <thead>
                 <tr>
                     <th scope="col">  nom du domaine  </th>
@@ -56,5 +61,7 @@
 				</th>
 			</tr>
 		</table>
-
-		@endsection
+@endif
+</div>
+</main>
+@endsection

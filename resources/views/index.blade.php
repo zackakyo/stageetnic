@@ -2,11 +2,15 @@
  @extends('layouts.base')
 
 
-@section('title', "Ecran 1 : liste des sites")
+@section('title1', "Ecran 1 : Accueil")
+@section('title2', "Liste des sites ")
     
-@section('left')
+@section('content')
+
+<main class="col-md col-lg border " role="main" >
+        <div class="single_service wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+
 <table border="1px" class="col-sm" >
-	<caption>Details de chaque site:</caption>
 	<thead>
 		<tr>
 			<th scope="col">Environnement</th>
@@ -22,7 +26,7 @@
 			<tr>
 				<td>{{$env->abreviation}}</td>
 				<td>aaaaa</td>
-				<td> <a href="{{ Route('instance.index') }}">détails de l'instance</a> </td>
+				<td> <a href="{{ Route('instance.index', 1) }}">détails de l'instance</a> </td>
 				<td> <a href="/site/">détails site</a> </td>
 				<td>aaaaa</td>
 				<td>aaaaa</td>
@@ -32,6 +36,11 @@
 		@endforelse
 	</tbody>
 </table>
+
+</div>
+        </div>               
+    </div>
+</main>
 @endsection
 
 

@@ -1,7 +1,10 @@
+            
+            <main class="col-lg col-md border">
+                <div class="single_service wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".5s">
+            
+                    <h2>Les versions de PHP <a href="{{ route('php.create') }}" class="btn btn-info">Ajouter</a> </h2>
 
-        <div class="col-sm align-items-center justify-content-center text-center">
-<h2>Les versions de PHP <a href="{{ route('php.create') }}" class="btn btn-info">Ajouter</a> </h2>
-<table class="table" >
+                        <table class="table" >
     <thead>
         <tr>
             <th>
@@ -35,5 +38,6 @@
             </tr>
         @endforelse
     </tbody>
-</table>
+</table>                                                                        
 </div>
+</main>

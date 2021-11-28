@@ -15,10 +15,10 @@ class InstanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pge=1)
     {
         $ext = Extension::all();
-        return view('instance', ['extensions' => $ext]); 
+        return view('instance', ['extensions' => $ext, 'pge'=>$pge]); 
     }
 
     /**
@@ -50,7 +50,8 @@ class InstanceController extends Controller
      */
     public function show($id)
     {
-        //
+        $ext = Extension::all();
+        return view('instance', ['extensions' => $ext, 'pge'=>$id]); 
     }
 
     /**

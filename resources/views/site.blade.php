@@ -2,11 +2,14 @@
  @extends('layouts.base')
 
 
-@section('title', "Ecran 3 : site")
+@section('title1', "Ecran 3 : site")
+@section('title2', "Détails du site ")
     
-@section('left')
+@section('content')
+
+<main class="col-md col-lg border " role="main" >
+        <div class="single_service wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 <table border="1px" class="col-sm" >
-			<caption>détails du site </caption>
             <thead>
                 <tr>
                     <th scope="col">Domaine principal </th>
@@ -29,5 +32,6 @@
 						</tr>	
                     </tbody>
     </table>
-
-    @endsection
+               
+    </div>
+</main>
