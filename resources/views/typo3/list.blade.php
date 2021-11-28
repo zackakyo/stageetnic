@@ -2,9 +2,9 @@
             <main class="col-lg col-md border">
                 <div class="single_service wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".5s">
             
-                    <h2>Les versions de TYPO3 <a href="{{ route('typo3.create') }}" class="btn btn-info">Ajouter</a> </h2>
+                    <h2 class="text-white">Les versions de TYPO3 <a href="{{ route('typo3.create') }}" class="btn btn-success">Ajouter</a> </h2>
 
-                        <table class="table" >
+                        <table class="table text-white" >
     <thead>
         <tr>
             <th>
@@ -28,7 +28,7 @@
                 {{ $typo3->version_complete }}  
             </td>
             <td>
-                <a href="{{ route('typo3.edit', $typo3->id) }}" class="btn btn-success" > modifier</a>
+                <a href="{{ route('typo3.edit', $typo3->id) }}" class="btn btn-warning" > modifier</a>
             </td>
             <td>
                 <form method="post" class="form" action="{{ Route('typo3.destroy', $typo3->id) }}">

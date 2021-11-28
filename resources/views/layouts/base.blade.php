@@ -105,7 +105,7 @@
     <!-- service_area_end  -->
 
     <!-- footer start -->
-    <footer class="footer" role="contentinfo">
+    <footer class="footer bg-dark" role="contentinfo">
         <div class="footer_top">
             <div class="container">
                 
@@ -144,7 +144,7 @@
                                     <div class="footer_border"></div>
                                     <div class="row">
                                         <div class="col-xl-12">
-                                            <p class="copy_right text-center">
+                                            <p class="copy_right text-center text-white font-weight-bold">
                                                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> | Stage ETNIC  =>  Isaac T.N.
                                             </p>
                                         </div>

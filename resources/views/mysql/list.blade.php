@@ -2,9 +2,9 @@
             <main class="col-lg col-md border">
                 <div class="single_service wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".5s">
             
-                    <h2>Les versions de MYSQL <a href="{{ route('mysql.create') }}" class="btn btn-info">Ajouter</a> </h2>
+                    <h2 class="text-white">Les versions de MYSQL <a href="{{ route('mysql.create') }}" class="btn btn-success">Ajouter</a> </h2>
 
-                        <table class="table" >
+                        <table class="table text-white" >
     <thead>
         <tr>
             <th>
@@ -22,7 +22,7 @@
                 {{ $mysql->version }}  
             </td>
             <td>
-                <a href="{{ route('mysql.edit', $mysql->id) }}" class="btn btn-success" > modifier</a>
+                <a href="{{ route('mysql.edit', $mysql->id) }}" class="btn btn-warning" > modifier</a>
             </td>
             <td>
                 <form method="post" class="form" action="{{ Route('mysql.destroy', $mysql->id) }}">

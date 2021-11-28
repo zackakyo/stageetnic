@@ -10,9 +10,9 @@
 <main class="col-md col-lg border " role="main" >
         <div class="single_service wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
 
-<table border="1px" class="col-sm" >
-	<thead>
-		<tr>
+<table class="table table-hover text-white col-sm" >
+	<thead class="thead">
+		<tr class="font-weight-bold">
 			<th scope="col">Environnement</th>
 			<th scope="col">Serveur</th>
 			<th scope="col">Instance</th>  
@@ -26,7 +26,7 @@
 			<tr>
 				<td>{{$env->abreviation}}</td>
 				<td>aaaaa</td>
-				<td> <a href="{{ Route('instance.index', 1) }}">détails de l'instance</a> </td>
+				<td> <a href="{{ Route('instance.index', 1) }}" class="link text-warning">détails de l'instance</a> </td>
 				<td> <a href="/site/">détails site</a> </td>
 				<td>aaaaa</td>
 				<td>aaaaa</td>

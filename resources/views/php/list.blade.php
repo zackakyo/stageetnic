@@ -2,9 +2,9 @@
             <main class="col-lg col-md border">
                 <div class="single_service wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".5s">
             
-                    <h2>Les versions de PHP <a href="{{ route('php.create') }}" class="btn btn-info">Ajouter</a> </h2>
+                    <h2 class="text-white">Les versions de PHP <a href="{{ route('php.create') }}" class="btn btn-success btn-lg">Ajouter</a> </h2>
 
-                        <table class="table" >
+                        <table class="table table-striped text-white" >
     <thead>
         <tr>
             <th>
@@ -22,7 +22,7 @@
                 {{ $php->version }}  
             </td>
             <td>
-                <a href="{{ route('php.edit', $php->id) }}" class="btn btn-success" > modifier</a>
+                <a href="{{ route('php.edit', $php->id) }}" class="btn btn-warning" > modifier</a>
             </td>
             <td>
                 <form method="post" class="form" action="{{ Route('php.destroy', $php->id) }}">
