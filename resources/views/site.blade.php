@@ -18,7 +18,7 @@
                     <th scope="col">  nom du site </th>
                     <th scope="col">Prefix site </th> 
                     <th scope="col">id pag acceuil </th> 
-                    <th scope="col">nom pag acceuil </th> 
+                    <th scope="col">nom pag accueil </th> 
                     <th scope="col">En prod </th> 
                     <th scope="col"> date création Pg Ac </th> 
                 </tr> 
