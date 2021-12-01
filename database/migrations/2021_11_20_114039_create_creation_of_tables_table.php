@@ -16,102 +16,102 @@ class CreateCreationOfTablesTable extends Migration
         Schema::create('environnements', function (Blueprint $table) {
             $table->id();
             $table->string('abreviation');
-            $table->string('nom'); 
+            $table->string('nom');
             $table->timestamps();
         });
 
         Schema::create('phps', function (Blueprint $table) {
             $table->id();
-            $table->string('version'); 
+            $table->string('version');
             $table->timestamps();
         });
-        
+
         Schema::create('mysqls', function (Blueprint $table) {
             $table->id();
-            $table->string('version'); 
+            $table->string('version');
             $table->timestamps();
         });
-        
+
         Schema::create('solrs', function (Blueprint $table) {
             $table->id();
-            $table->string('version'); 
+            $table->string('version');
             $table->timestamps();
         });
 
         Schema::create('serveurs', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');  
+            $table->string('nom');
             $table->string('adresse_ip')->default('unk');
-            $table->string('version_redhat')->default('unk'); 
+            $table->string('version_redhat')->default('unk');
             $table->string('version_apache')->default('unk');
             $table->foreignId('php_id')->nullable()->constrained();
             $table->foreignId('mysql_id')->nullable()->constrained();
             $table->foreignId('solr_id')->nullable()->constrained();
             $table->foreignId('environnement_id')->constrained();
-            // Schema::enableForeignKeyConstraints(); 
+            // Schema::enableForeignKeyConstraints();
             $table->timestamps();
         });
 
         Schema::create('base_de_donnees', function (Blueprint $table) {
             $table->id();
-            $table->string('nom'); 
+            $table->string('nom');
             $table->foreignId('serveur_id')->constrained();
             $table->timestamps();
         });
-        
+
         Schema::create('typo3s', function (Blueprint $table) {
             $table->id();
             $table->string('version_courte');
             $table->string('version_complete');
             $table->timestamps();
         });
-          
+
         Schema::create('instances', function (Blueprint $table) {
             $table->id();
-            $table->string('nom'); 
-            $table->string('url_backend')->nullable(); 
-            $table->foreignId('typo3_id')->nullable()->constrained();  
+            $table->string('nom');
+            $table->string('url_backend')->nullable();
+            $table->foreignId('typo3_id')->nullable()->constrained();
             $table->foreignId('serveur_id')->constrained();
-            $table->foreignId('base_de_donnees_id')->nullable()->constrained(); 
+            $table->foreignId('base_de_donnees_id')->nullable()->constrained();
             $table->timestamps();
         });
 
         Schema::create('extensions', function (Blueprint $table) {
             $table->id();
-            $table->string('nom'); 
-            $table->boolean('ter')->default(false); 
-            $table->boolean('actif')->default(false); 
-            $table->string('version_ext')->default('unk'); 
+            $table->string('nom');
+            $table->boolean('ter')->default(false);
+            $table->boolean('actif')->default(false);
+            $table->string('version_ext')->default('unk');
             $table->timestamps();
         });
-        
+
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->string('nom'); 
-            $table->string('prefixe'); 
-            $table->string('domaine'); 
-            $table->boolean('pre_prod')->default(True)->change(); 
-            $table->integer('root_id'); 
-            $table->date('root_crdate'); 
-            $table->foreignId('instance_id')->constrained();
+            $table->string('nom')->nullable();
+            $table->string('prefixe')->nullable();
+            $table->string('domaine')->nullable();
+            $table->boolean('pre_prod')->default(True)->change();
+            $table->integer('root_id')->nullable();
+            $table->dateTime('root_crdate')->nullable();
+            $table->foreignId('instance_id')->nullable()->constrained();
             $table->timestamps();
         });
 
         Schema::create('extension_typo3', function (Blueprint $table) {
-            $table->foreignId('extension_id'); 
-            $table->foreignId('typo_id'); 
-        }); 
+            $table->foreignId('extension_id');
+            $table->foreignId('typo_id');
+        });
 
         Schema::create('extension_instance', function (Blueprint $table) {
-            $table->foreignId('extension_id'); 
-            $table->foreignId('instance_id'); 
-        }); 
+            $table->foreignId('extension_id');
+            $table->foreignId('instance_id');
+        });
 
         Schema::create('extension_site', function (Blueprint $table) {
-            $table->foreignId('extension_id'); 
-            $table->foreignId('site_id'); 
-        }); 
-    
+            $table->foreignId('extension_id');
+            $table->foreignId('site_id');
+        });
+
     }
 
     /**

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Extension extends Model
 {
     use HasFactory;
+    public function sites() {
+        return $this->belongsToMany(Site::class, "extension_site");
+        }
 }

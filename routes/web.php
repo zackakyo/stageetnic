@@ -12,6 +12,8 @@ use App\Http\Controllers\MysqlController;
 use App\Http\Controllers\SolrController;
 use App\Http\Controllers\Typo3Controller;
 
+use App\Http\Controllers\TestController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,12 +31,13 @@ Route::resource('instance', InstanceController::class);
 Route::resource('extension', ExtensionController::class);
 Route::resource('site', SiteController::class);
 
-
 Route::resource('fillDB', LoadDataController::class); 
 Route::resource('php', PhpController::class); 
 Route::resource('mysql', MysqlController::class); 
 Route::resource('solr', SolrController::class); 
-Route::resource('typo3', typo3Controller::class); 
+Route::resource('typo3', Typo3Controller::class); 
+
+Route::resource('test', TestController::class); 
 
 // Route::get('test', 'php/index'); 
 
