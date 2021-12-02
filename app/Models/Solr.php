@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Solr extends Model
 {
     use HasFactory;
+
+    public function serveurs(){
+        return $this->hasMany(Serveur::class);
+    }
+
+
 }

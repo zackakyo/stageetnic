@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Mysql extends Model
 {
     use HasFactory;
+
+    public function serveurs(){
+        return $this->hasMany(Serveur::class);
+    }
 }

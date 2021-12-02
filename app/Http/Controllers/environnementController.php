@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Environnement;
+use App\Models\Site;
 use Illuminate\Http\Request;
 // use League\CommonMark\Environment\Environnement;
+
 
 class EnvironnementController extends Controller
 {
@@ -14,9 +16,9 @@ class EnvironnementController extends Controller
      */
     public function index()
     {
-        $envs = Environnement::all();
-        return view('index', ['environnements' => $envs]); 
-        // return view(view:'environnement.index', compact(vamame:'envs')); 
+        $envs = Site::all();
+        return view('index', ['environnements' => $envs]);
+        // return view(view:'environnement.index', compact(vamame:'envs'));
     }
 
     /**

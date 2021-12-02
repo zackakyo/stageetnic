@@ -14,12 +14,12 @@ use League\CommonMark\Environment\Environment;
 
 class LoadDataController extends Controller
 {
-    public $REPERTOIRE1 =  "C:/Users/onant/Desktop/STAGE_ETNIC/ressources/structure_repertoires";
-    public $REPERTOIRE2 =  "C:/Users/onant/Desktop/STAGE_ETNIC/ressources/sites";
+    public $REPERTOIRE =  "C:/Users/onant/Desktop/STAGE_ETNIC/ressources/structure_repertoires";
+
 
     public function index()
     {
-        $repertoire = $this->REPERTOIRE1;
+        $repertoire = $this->REPERTOIRE;
         $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
         while($fichier = @readdir($le_repertoire))
         {
@@ -134,14 +134,13 @@ class LoadDataController extends Controller
         }
         if(isset($connection)) $connect = $this->ConnectDB($connection[0], $connection[1], $connection[2], $connection[3] );
         if( isset($connect) && $connect){
-        //     $this->FillSitesInf9($connect );
+            $this->FillSitesInf9($connect );
         }
         if(isset($repSites) ) $this->FillSites9plus($repSites, $connect );
     }
 
     public function FillSites9plus($repertoire, $bdd=null)
     {
-        // $repertoire = (string) $repertoire;
         $le_repertoire = opendir( $repertoire ) or die("Erreur le repertoire hello $repertoire n'existe pas");
         while($fichier = @readdir($le_repertoire))
         {

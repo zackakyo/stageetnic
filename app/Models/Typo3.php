@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Typo3 extends Model
 {
     use HasFactory;
+
+    public function instances(){
+        return $this->hasMany(Instance::class);
+    }
+
+
+
+
 }
