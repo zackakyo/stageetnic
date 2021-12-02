@@ -18,9 +18,15 @@ class Instance extends Model
     }
 
     public function base_de_donnee(){
-        return $this->belongsTo(Base_de_donnee::class);
+        return $this->hasOne(Base_de_donnee::class);
     }
     public function typo3(){
         return $this->belongsTo(Typo3::class);
     }
+
+    public function extensions() {
+        return $this->belongsToMany(Extension::class);
+        }
+
+
 }

@@ -13,6 +13,10 @@ class Typo3 extends Model
         return $this->hasMany(Instance::class);
     }
 
+    public function extensions() {
+        return $this->belongsToMany(Extension::class);
+        }
+
 
 
 

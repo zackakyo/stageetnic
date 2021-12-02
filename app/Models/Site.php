@@ -14,6 +14,8 @@ class Site extends Model
     }
 
     public function extensions() {
-        return $this->belongsToMany(extension::class, "extension_site");
+        return $this->belongsToMany(Extension::class);
         }
+
+
 }

@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Extension extends Model
 {
     use HasFactory;
+
     public function sites() {
-        return $this->belongsToMany(Site::class, "extension_site");
+        return $this->belongsToMany(Site::class);
+        }
+    public function typo3s() {
+        return $this->belongsToMany(Typo3::class);
+        }
+    public function instances() {
+        return $this->belongsToMany(Instance::class);
         }
 }

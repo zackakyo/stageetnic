@@ -61,7 +61,7 @@ class CreateCreationOfTablesTable extends Migration
 
         Schema::create('typo3s', function (Blueprint $table) {
             $table->id();
-            $table->string('version_courte');
+            $table->string('version_courte')->index();
             $table->string('version_complete');
             $table->timestamps();
         });
@@ -78,7 +78,7 @@ class CreateCreationOfTablesTable extends Migration
 
         Schema::create('extensions', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('nom')->index();
             $table->boolean('ter')->default(false);
             $table->boolean('actif')->default(false);
             $table->string('version_ext')->default('unk');
@@ -98,18 +98,33 @@ class CreateCreationOfTablesTable extends Migration
         });
 
         Schema::create('extension_typo3', function (Blueprint $table) {
-            $table->foreignId('extension_id');
-            $table->foreignId('typo_id');
+            // $table->integer('extension_id')->unsigned()->index();
+            // $table->foreign('extension_id')->references('id')->on('extensions')->onDelete('cascade');
+            $table->foreignId('extension_id')->constrained()->onDelete('cascade');
+            $table->foreignId('typo3_id')->references('id')->on('typo3s')->onDelete('cascade');
+            // $table->integer('typo3_id')->unsigned()->index();
+            // $table->foreign('typo3_id')->references('id')->on('typo3s')->onDelete('cascade');
+            $table->primary(['extension_id', 'typo3_id']);
         });
 
         Schema::create('extension_instance', function (Blueprint $table) {
-            $table->foreignId('extension_id');
-            $table->foreignId('instance_id');
+            $table->foreignId('extension_id')->constrained()->onDelete('cascade');
+            $table->foreignId('instance_id')->constrained()->onDelete('cascade');
+        //     $table->integer('extension_id')->unsigned()->index();
+        //     $table->foreign('extension_id')->references('id')->on('extensions')->onDelete('cascade');
+        //     $table->integer('instance_id')->unsigned()->index();
+        //     $table->foreign('instance_id')->references('id')->on('instances')->onDelete('cascade');
+        //     $table->primary(['extension_id', 'instance_id']);
         });
 
         Schema::create('extension_site', function (Blueprint $table) {
-            $table->foreignId('extension_id');
-            $table->foreignId('site_id');
+            $table->foreignId('extension_id')->constrained()->onDelete('cascade');
+            $table->foreignId('site_id')->references('id')->on('typo3s')->onDelete('cascade');
+        //     $table->integer('extension_id')->unsigned()->index();
+        //     $table->foreign('extension_id')->references('id')->on('extensions')->onDelete('cascade');
+        //     $table->integer('site_id')->unsigned()->index();
+        //     $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
+        //     $table->primary(['extension_id', 'site_id']);
         });
 
     }
