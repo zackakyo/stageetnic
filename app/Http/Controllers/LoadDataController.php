@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Base_de_donnee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Environnement;
 use App\Models\Instance;
 use App\Models\Serveur;
@@ -30,7 +31,6 @@ class LoadDataController extends Controller
                 {
                     $env = new Environnement;
                     $env->abreviation=$fichier;
-                    $env->nom="";
                     $env->save();
                 }
                 $env = Environnement::all()->where('abreviation', $fichier)->first();
@@ -101,9 +101,12 @@ class LoadDataController extends Controller
                     array_push($Ntyp3, $fichier);
                     $ext = new Extension;
                     $ext->nom=$fichier;
+                    $ext->actif=true;
                     $ext->save();
                 }
                 $ext = Extension::all()->where('nom', $fichier)->first();
+                DB::table('extension_instance')->insertOrIgnore(['extension_id'=>$ext->id , 'instance_id'=>$inst->id]);
+                if(isset($inst->typo3_id) && $inst->typo3_id) DB::table('extension_typo3')->insertOrIgnore(['extension_id'=>$ext->id , 'typo3_id'=>$inst->typo3_id]);
                 $this->ExploreEmConf($repertoire.'/'.$fichier, $ext, $Ntyp3);
             }elseif($fichier == "LocalConfiguration.php"){
                 $localConf = include($repertoire.'/'.$fichier);
@@ -118,6 +121,8 @@ class LoadDataController extends Controller
                                 $ext->ter= true;
                             }
                             $ext->save();
+                            DB::table('extension_instance')->insertOrIgnore(['extension_id'=>$ext->id , 'instance_id'=>$inst->id]);
+                            if(isset($inst->typo3_id) && $inst->typo3_id) DB::table('extension_typo3')->insertOrIgnore(['extension_id'=>$ext->id , 'typo3_id'=>$inst->typo3_id]);
                         }
                     }
                 }
@@ -127,6 +132,9 @@ class LoadDataController extends Controller
                     $db->serveur_id = $inst->serveur_id;
                     $db->nom = $localConf['DB']['Connections']['Default']['dbname'];
                      $db->save();
+                     $inst->base_de_donnees_id = $db->id;
+                    //  $inst->base_de_donnees_id = $db->id;
+                     $inst->save();
                 }
                 $info = $localConf['DB']['Connections']['Default'];
                 $connection = [$info['host'], $info['dbname'], $info['user'], $info['password'] ];
@@ -134,12 +142,12 @@ class LoadDataController extends Controller
         }
         if(isset($connection)) $connect = $this->ConnectDB($connection[0], $connection[1], $connection[2], $connection[3] );
         if( isset($connect) && $connect){
-            $this->FillSitesInf9($connect );
+            $this->FillSitesInf9($connect, $inst );
         }
-        if(isset($repSites) ) $this->FillSites9plus($repSites, $connect );
+        if(isset($repSites) ) $this->FillSites9plus($repSites, $connect, $inst );
     }
 
-    public function FillSites9plus($repertoire, $bdd=null)
+    public function FillSites9plus($repertoire, $bdd, $inst)
     {
         $le_repertoire = opendir( $repertoire ) or die("Erreur le repertoire hello $repertoire n'existe pas");
         while($fichier = @readdir($le_repertoire))
@@ -147,7 +155,7 @@ class LoadDataController extends Controller
             if ($fichier == "." || $fichier == "..") continue;
             if(is_dir($repertoire.'/'.$fichier))
             {
-                $this->FillSites9plus($repertoire.'/'.$fichier, $bdd);
+                $this->FillSites9plus($repertoire.'/'.$fichier, $bdd, $inst);
             }elseif($fichier == "config.yaml"){
                 $data = $this->FindInConfigYan($repertoire.'/'.$fichier, 'base:');
                 if(!($site = Site::all()->where('domaine', $data)->first()))
@@ -157,6 +165,7 @@ class LoadDataController extends Controller
                     $site->nom = $this->FindInConfigYan($repertoire.'/'.$fichier, 'websiteTitle:');
                     $rootPid = $this->FindInConfigYan($repertoire.'/'.$fichier, 'rootPageId:');
                     $site->root_id = $rootPid;
+                    $site->instance_id = $inst->id;
                     if(isset($bdd) && $bdd ){
                         $rec = $bdd->prepare("select * from pages where uid=?");
                         $rec->execute(array($rootPid));
@@ -165,6 +174,7 @@ class LoadDataController extends Controller
                         if(isset($page['crdate'])) $site->root_crdate = new \DateTime('@' .$page['crdate']);
                     }
                     $site->save();
+                    // DB::table('extension_site')->insertOrIgnore(['extension_id'=>$ext->id , 'site_id'=>$inst->typo3_id]);
                 }
             }
         }
@@ -193,7 +203,7 @@ class LoadDataController extends Controller
         }
     }
 
-    public function FillSitesInf9($bdd)
+    public function FillSitesInf9($bdd, $inst)
     {
         $dbs = $bdd->query("select * from sys_domain");
         while($db = $dbs->fetch())
@@ -208,6 +218,7 @@ class LoadDataController extends Controller
                 $site->domaine = $db['domainName'];
                 if(isset($page['title'])) $site->nom = $page['title'];
                 if(isset($page['crdate'])) $site->root_crdate = new \DateTime('@' .$page['crdate']);
+                $site->instance_id = $inst->id;
                 $site->save();
             }else{
                 if(!stristr($site->domaine, $db['domainName'])) $site->domaine .= ", ".$db['domainName'];
@@ -217,6 +228,7 @@ class LoadDataController extends Controller
                 if(isset($page['crdate'])){
                     if($site->root_crdate != $page['crdate']) $site->root_crdate = new \DateTime('@' .$page['crdate']);
                 }
+                if(! $site->instance_id) $site->instance_id = $inst->id;
                 $site->save();
             }
         }

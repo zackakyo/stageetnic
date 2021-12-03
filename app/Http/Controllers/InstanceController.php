@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Site;
 use App\Models\Extension;
+use App\Models\Instance;
 
 class InstanceController extends Controller
 {
@@ -18,7 +19,7 @@ class InstanceController extends Controller
     public function index($pge=1)
     {
         $ext = Extension::all();
-        return view('instance', ['extensions' => $ext, 'pge'=>$pge]); 
+        return view('instance', ['extensions' => $ext, 'pge'=>$pge]);
     }
 
     /**
@@ -48,10 +49,10 @@ class InstanceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $pge=1)
     {
-        $ext = Extension::all();
-        return view('instance', ['extensions' => $ext, 'pge'=>$id]); 
+        $inst = Instance::find($id);
+        return view('instance', ['inst' => $inst, 'pge'=>$pge]);
     }
 
     /**

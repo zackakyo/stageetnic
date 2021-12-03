@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Environnement;
+use App\Models\Site;
 
-use App\Models\Extension;
 
-class ExtensionController extends Controller
+class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,11 @@ class ExtensionController extends Controller
      */
     public function index()
     {
-        $ext = Extension::all();
-        return view('extension', ['extensions' => $ext]);
-
+        $sites = Site::all();
+        // $sites = Site::with('instance')->get();
+        // dd($sites);
+        return view('index', ['sites' => $sites]);
+        // return view(view:'environnement.index', compact(vamame:'envs'));
     }
 
     /**
@@ -49,8 +52,7 @@ class ExtensionController extends Controller
      */
     public function show($id)
     {
-        $ext = Extension::find($id);
-        return view('extension', ['extension' => $ext]);
+        //
     }
 
     /**

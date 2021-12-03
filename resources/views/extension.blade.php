@@ -4,7 +4,7 @@
 
 @section('title1', "Ecran 4 : extension")
 @section('title2', "Détails d'une extension ")
-    
+
 @section('content')
 
 <main class="col-md col-lg border " role="main" >
@@ -20,18 +20,27 @@
                 </tr>
             </thead>
 					<tbody>
-						<tr>
-							<td> xxxxxxx  </td>
-							<td> <a href="/instance/" class="text-warning">qoimmd</a> </td>
-							<td> 5.0.1 </td>
-							<td> oui / non </td>
-							<td> oui / non </td>
-						</tr>	
+                        @forelse ($extension->instances as $inst )
+                            <tr>
+                                <td> {{$inst->serveur->environnement->abreviation }}  </td>
+                                <td> <a href="{{ url('instance', [$inst->id, 1] ) }}" class="text-warning">{{ $inst->nom }}</a> </td>
+                                <td> {{ $extension->version_ext }} </td>
+                                <td> oui / non </td>
+                                <td> oui / non </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" >
+                                    pas de détails disponibles
+                                </td>
+                            </tr>
+                        @endforelse
+
                     </tbody>
 </table>
 
 </div>
-        </div>               
+        </div>
     </div>
 </main>
  @endsection

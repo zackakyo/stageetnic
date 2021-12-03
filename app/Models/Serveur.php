@@ -11,14 +11,14 @@ class Serveur extends Model
     public function environnement(){
         return $this->belongsTo(Environnement::class);
     }
-    public function solr(){
-        return $this->belongsTo(Solr::class);
+    public function solrs(){
+        return $this->belongsToMany(Solr::class);
     }
-    public function mysql(){
-        return $this->belongsTo(Mysql::class);
+    public function mysqls(){
+        return $this->belongsToMany(Mysql::class);
     }
-    public function php(){
-        return $this->belongsTo(Php::class);
+    public function phps(){
+        return $this->belongsToMany(Php::class);
     }
     public function instances(){
         return $this->hasMany(Instance::class);

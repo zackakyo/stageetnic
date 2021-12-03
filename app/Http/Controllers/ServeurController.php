@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Extension;
-
-class ExtensionController extends Controller
+class ServeurController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,7 @@ class ExtensionController extends Controller
      */
     public function index()
     {
-        $ext = Extension::all();
-        return view('extension', ['extensions' => $ext]);
-
+        //
     }
 
     /**
@@ -49,8 +45,7 @@ class ExtensionController extends Controller
      */
     public function show($id)
     {
-        $ext = Extension::find($id);
-        return view('extension', ['extension' => $ext]);
+        //
     }
 
     /**

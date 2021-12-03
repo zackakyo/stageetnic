@@ -22,14 +22,15 @@
 		</tr>
 	</thead>
 	<tbody>
-		@forelse($environnements as $env)
+		@forelse($sites as $site)
 			<tr>
-				<td>environnement</td>
+
+				<td>{{ $site->instance->serveur->environnement->abreviation }}</td>
+				<td>{{ $site->instance->serveur->nom }}</td>
+				<td> <a href="{{ url('instance', [$site->instance_id, 1] ) }}" class="link text-warning">{{ $site->instance->nom }}</a> </td>
+				<td> <a href="{{ Route('site.show', $site->id ) }}" class="link text-white" >{{ $site->nom }}</a> </td>
 				<td>aaaaa</td>
-				<td> <a href="{{ Route('instance.index', 1) }}" class="link text-warning">détails de l'instance</a> </td>
-				<td> <a href="/site/">{{ $env->domaine }}</a> </td>
-				<td>aaaaa</td>
-				<td>aaaaa</td>
+				<td>{{ $site->root_crdate }}</td>
 			</tr>
 		@empty
 			aucun environnement n'est disponible

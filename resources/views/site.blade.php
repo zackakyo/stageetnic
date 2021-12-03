@@ -4,7 +4,7 @@
 
 @section('title1', "Ecran 3 : site")
 @section('title2', "Détails du site ")
-    
+
 @section('content')
 
 <div class="row" >
@@ -16,25 +16,26 @@
                 <tr>
                     <th scope="col">Domaine principal </th>
                     <th scope="col">  nom du site </th>
-                    <th scope="col">Prefix site </th> 
-                    <th scope="col">id pag acceuil </th> 
-                    <th scope="col">nom pag accueil </th> 
-                    <th scope="col">En prod </th> 
-                    <th scope="col"> date création Pg Ac </th> 
-                </tr> 
+                    <th scope="col">Prefix site </th>
+                    <th scope="col">id pag acceuil </th>
+                    <th scope="col">nom pag accueil </th>
+                    <th scope="col">En prod </th>
+                    <th scope="col"> date création Pg Ac </th>
+                </tr>
             </thead>
 					<tbody>
+
 						<tr>
-							<td> aaaaaa </td>
-							<td> adsdfsf </td>
-							<td> .com </td>
-							<td> 12 </td>
-							<td> sqdfa </td>
+							<td> {{ $site->domaine }} </td>
+							<td> {{ $site->nom }} </td>
+							<td> {{ $site->prefixe }} </td>
+							<td>{{ $site->root_id }} </td>
+							<td> {{ $site->nom }} </td>
 							<td> oui / non  </td>
-							<td> 15/05/2000 </td>
-						</tr>	
+							<td> {{ $site->root_crdate }} </td>
+						</tr>
                     </tbody>
-    </table>        
+    </table>
 </div>
 </main>
 </div>

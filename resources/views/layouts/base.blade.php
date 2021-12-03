@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/site/logo_eqla.png') }}">
-   
+
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -39,7 +39,7 @@
                                 <div class="logo">
                                     <a href="{{ url('/') }}">
                                         <img src="{{ asset('img/site/logo_etnic.png') }}" height="100" alt="logo" role="logo">
-                                    
+
                                     </a>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         <ul id="navigation">
                                             <li><a href="{{ url('/') }}">Accueil</a></li>
                                             <li><a href="{{ route('fillDB.index') }}">RefreshDB</a></li>
-                                            <li><a href=""  >DropDB</a></li>
+                                            {{-- <li><a href="{{ route('test.index') }}"  >DropDB</a></li> --}}
                                             <li><a href="{{ route('php.index') }}"  >BackEnd</a></li>
                                         </ul>
                                     </nav>
@@ -96,7 +96,7 @@
 
 
                 @section('content')
-            
+
                 @show
 
         </div>
@@ -107,7 +107,7 @@
     <footer class="footer bg-dark" role="contentinfo">
         <div class="footer_top">
             <div class="container">
-                
+
                         <div class="footer_widget wow fadeInUp row " data-wow-duration="1s" data-wow-delay=".3s">
                             <div class="footer_logo col">
                                 <a href="#">
@@ -150,12 +150,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
-                    
-                    
-                    
-                
+
+
+
+
             </div>
         </div>
 

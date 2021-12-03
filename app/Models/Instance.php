@@ -9,8 +9,8 @@ class Instance extends Model
 {
     use HasFactory;
 
-    public function serveurs(){
-        return $this->hasMany(Serveur::class);
+    public function serveur(){
+        return $this->belongsTo(Serveur::class);
     }
 
     public function sites(){

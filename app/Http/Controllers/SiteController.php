@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Environnement;
 
+use App\Models\Site;
 
 class SiteController extends Controller
 {
@@ -16,7 +17,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        
+
         return view('site');
     }
 
@@ -49,7 +50,8 @@ class SiteController extends Controller
      */
     public function show($id)
     {
-        //
+        $site= Site::find($id);
+        return view('site', ['site'=>$site] );
     }
 
     /**

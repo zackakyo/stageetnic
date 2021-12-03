@@ -10,6 +10,6 @@ class Php extends Model
     use HasFactory;
 
     public function serveurs(){
-        return $this->hasMany(Serveur::class);
+        return $this->belongsToMany(Serveur::class);
     }
 }
