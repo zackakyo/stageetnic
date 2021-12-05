@@ -11,6 +11,8 @@ use App\Http\Controllers\PhpController;
 use App\Http\Controllers\MysqlController;
 use App\Http\Controllers\SolrController;
 use App\Http\Controllers\Typo3Controller;
+use App\Http\Controllers\ServeurController;
+use App\Http\Controllers\InstancebController;
 
 use App\Http\Controllers\TestController;
 
@@ -30,7 +32,7 @@ Route::get('/test', function(){
     return $site;
 });
 Route::resource('/', IndexController::class);
-// Route::resource('instance', InstanceController::class);
+Route::resource('instanceb', InstancebController::class);
 Route::get('instance/{id}/{pge}', [InstanceController::class, 'show']);
 Route::resource('extension', ExtensionController::class);
 Route::resource('site', SiteController::class);
@@ -40,6 +42,7 @@ Route::resource('php', PhpController::class);
 Route::resource('mysql', MysqlController::class);
 Route::resource('solr', SolrController::class);
 Route::resource('typo3', Typo3Controller::class);
+Route::resource('serveur', ServeurController::class);
 
 // Route::resource('test', TestController::class);
 

@@ -4,22 +4,22 @@
 
 @section('title1', "Back-end")
 @section('content')
-@section('title2', "serveur")
+@section('title2', "instance")
 @section('content')
 <div class="row" >
     @component('layouts.components.backendoptions')
     @endcomponent
-    @component('serveur.list', ['serveurs'=>$serveurs] )
+    @component('instance.list', ['instances'=>$instances] )
     @endcomponent
 
     @if ($view === 1)
-        @component('serveur.create')
+        @component('instance.create')
         @endcomponent
     @elseif($view === 2)
-        @component('serveur.edit', ['serveur'=>$serveur])
+        @component('instance.edit', ['instance'=>$instance])
         @endcomponent
     @elseif($view === 3)
-        @component('serveur.confirm')
+        @component('instance.confirm')
         @endcomponent
     @endif
     </div>

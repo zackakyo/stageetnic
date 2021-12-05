@@ -18,4 +18,8 @@ class Extension extends Model
     public function instances() {
         return $this->belongsToMany(Instance::class);
         }
+        public function versionExtensions(){
+            return $this->hasMany(VersionExtension::class);
+        }
+
 }

@@ -68,7 +68,7 @@ class CreateCreationOfTablesTable extends Migration
             $table->string('url_backend')->nullable();
             $table->foreignId('typo3_id')->nullable()->constrained();
             $table->foreignId('serveur_id')->constrained();
-            $table->foreignId('base_de_donnees_id')->nullable()->constrained();
+            $table->foreignId('base_de_donnee_id')->nullable()->constrained()->onDelete("cascade");
             $table->timestamps();
         });
 
@@ -132,7 +132,12 @@ class CreateCreationOfTablesTable extends Migration
             $table->foreignId('solr_id')->constrained()->onDelete('cascade');
             $table->primary(['serveur_id', 'solr_id']);
         });
-
+        Schema::create('versionExtensions', function (Blueprint $table) {
+            $table->id();
+            $table->string('version');
+            $table->foreignId('extension_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -156,4 +161,7 @@ class CreateCreationOfTablesTable extends Migration
         Schema::dropIfExists('extension_instance');
         Schema::dropIfExists('extension_site');
     }
+
+
+
 }

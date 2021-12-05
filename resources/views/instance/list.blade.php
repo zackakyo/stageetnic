@@ -2,7 +2,7 @@
             <main class="col-lg col-md border">
                 <div class="single_service wow fadeInRight" data-wow-duration="1.2s" data-wow-delay=".5s">
 
-                    <h2 class="text-white">Les versions de serveur </h2>
+                    <h2 class="text-white">Gestion des instances </h2>
 
                         <table class="table table-striped text-white" >
     <thead>
@@ -11,16 +11,16 @@
                 Nom
             </th>
             <th>
-                IP
+                url backend
             </th>
             <th>
-                redhat
+                typo3
             </th>
             <th>
-                Apache
+                serveur
             </th>
             <th>
-                EnvironnemenT
+                Base de donnees
             </th>
             <th >
                 Action
@@ -28,35 +28,35 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($serveurs as $serveur)
+        @forelse ($instances as $instance)
         <tr>
             <td>
-                {{ $serveur->nom }}
+                {{ $instance->nom }}
             </td>
             <td>
-                {{ $serveur->adresse_ip }}
+                {{ $instance->url_backend }}
             </td>
             <td>
-                {{ $serveur->version_redhat }}
+                {{ $instance->typo3_id ? $instance->typo3->version_courte : "unk" }}
             </td>
             <td>
-                {{ $serveur->version_apache }}
+                {{ $instance->serveur->nom }}
             </td>
             <td>
-                {{ $serveur->environnement->abreviation }}
+                {{ $instance->base_de_donnees_id ? $instance->base_de_donnee->nom : "" }}
             </td>
             {{-- <td>
-                @if($serveur->typo3->version_courte)
-                    {{ $serveur->typo3->version_courte }}
+                @if($instance->typo3->version_courte)
+                    {{ $instance->typo3->version_courte }}
                 @else
                     unk
                 @endif
             </td> --}}
             <td>
-                <a href="{{ route('serveur.edit', $serveur->id) }}" class="btn btn-warning" > modifier</a>
+                <a href="{{ route('instanceb.edit', $instance->id) }}" class="btn btn-warning" > modifier</a>
             </td>
             {{-- <td>
-                <form method="post" class="form" action="{{ Route('serveur.destroy', $serveur->id) }}">
+                <form method="post" class="form" action="{{ Route('instanceb.destroy', $instance->id) }}">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-danger" >Supprimer</button>
@@ -65,7 +65,7 @@
         </tr>
         @empty
             <tr>
-                <td colspan="3" class="" >Aucune version de serveur n'est disponible</td>
+                <td colspan="3" class="" >Aucune version de instance n'est disponible</td>
             </tr>
         @endforelse
     </tbody>

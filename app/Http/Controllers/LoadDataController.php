@@ -132,8 +132,8 @@ class LoadDataController extends Controller
                     $db->serveur_id = $inst->serveur_id;
                     $db->nom = $localConf['DB']['Connections']['Default']['dbname'];
                      $db->save();
-                     $inst->base_de_donnees_id = $db->id;
-                    //  $inst->base_de_donnees_id = $db->id;
+                     $inst->base_de_donnee_id = $db->id;
+                    //  $inst->base_de_donnee_id = $db->id;
                      $inst->save();
                 }
                 $info = $localConf['DB']['Connections']['Default'];
