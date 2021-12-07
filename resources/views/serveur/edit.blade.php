@@ -75,7 +75,7 @@
                                                     @empty
                                                     @endforelse
                                                     class="form-check-input" name="solrs[]" value="{{$solr->id}}">
-                                                    <label for="solr-{{$php->id}}" class="form-check-label text-white font-weight-bold" >{{$solr->version}}</label>
+                                                    <label for="solr-{{$solr->id}}" class="form-check-label text-white font-weight-bold" >{{$solr->version}}</label>
                                                 </div>
                                             @empty
                                                 <p>

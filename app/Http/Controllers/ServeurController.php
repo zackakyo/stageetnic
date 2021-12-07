@@ -85,9 +85,6 @@ class ServeurController extends Controller
     public function update(Request $request, $id)
     {
         $serveur = Serveur::find($id);
-        // $request->validate([
-        //     'version'=>'required',
-        // ]);
         $serveur->adresse_ip = $request->input('adresse_ip');
         $serveur->version_redhat = $request->input('version_redhat');
         $serveur->version_apache = $request->input('version_apache');
