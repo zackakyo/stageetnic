@@ -43,9 +43,3 @@ Route::resource('mysql', MysqlController::class);
 Route::resource('solr', SolrController::class);
 Route::resource('typo3', Typo3Controller::class);
 Route::resource('serveur', ServeurController::class);
-
-// Route::resource('test', TestController::class);
-
-// Route::get('test', 'php/index');
-
-

@@ -61,9 +61,10 @@ class LoadDataController extends Controller
         }
     }
 
+    // Cette méthode permet de scanner l'arborescence des repertooire et alimenter la table instance
+
     public function FillInstances($repertoire, $serv)
     {
-        // remplissage de la table serveurs
         $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
         while($fichier = @readdir($le_repertoire))
         {
@@ -83,6 +84,7 @@ class LoadDataController extends Controller
         }
     }
 
+    // Cette méthode permet de scanner l'arborescence des repertooire et alimenter la table des extensions
     public function FillExtensions($repertoire, $inst)
     {
         $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
@@ -147,6 +149,7 @@ class LoadDataController extends Controller
         if(isset($repSites) ) $this->FillSites9plus($repSites, $connect, $inst );
     }
 
+    // Cette méthode collecte les informations de site pour les versions de typo3 suérieure ou égale à 9
     public function FillSites9plus($repertoire, $bdd, $inst)
     {
         $le_repertoire = opendir( $repertoire ) or die("Erreur le repertoire hello $repertoire n'existe pas");
@@ -180,6 +183,7 @@ class LoadDataController extends Controller
         }
     }
 
+    // Cette méthode collecte toutes les informations nécessaires dans les fichier Emconf
     public function ExploreEmConf($repertoire, $ext)
     {
         $le_repertoire = opendir($repertoire) or die("Erreur le repertoire $repertoire n'existe pas");
@@ -203,6 +207,7 @@ class LoadDataController extends Controller
         }
     }
 
+    // Cette méthode collecte les informations pour les versions de typo3 inférieur à 9
     public function FillSitesInf9($bdd, $inst)
     {
         $dbs = $bdd->query("select * from sys_domain");
@@ -234,6 +239,7 @@ class LoadDataController extends Controller
         }
     }
 
+    // cette méthode permet de se connecter aux bases de données dynamiquement en fonction des informations recu du fichier emconv
     public function ConnectDB($host, $dbName, $user, $password)
     {
         try
@@ -246,6 +252,7 @@ class LoadDataController extends Controller
         }
     }
 
+    // cette méthode collecte les informations des différents fichiers configYan des extensions
     public function FindInConfigYan($fichier, $param)
     {
         $monfichier = fopen($fichier, 'r');
